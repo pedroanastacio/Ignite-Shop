@@ -45,12 +45,33 @@ export const Product = styled('a', {
         strong: {
             fontSize: '$lg', 
             color: '$gray100',
+            display: 'block',
         },
 
         span: {
             fontSize: '$xl',
             fontWeight: 'bold',
-            color: '$green300'
+            color: '$green300',
+            marginTop: '0.25rem',
+        },
+
+        button: {
+            width: 56,
+            height: 56,
+            padding: '0.75rem',
+            borderRadius: 6,
+            border: 0,
+            backgroundColor: '$purple500',
+            cursor: 'pointer',
+
+            svg: {
+                color: '$white',
+            },
+
+            '&:hover': {
+                backgroundColor: '$purple300',
+                transition: 'background-color 0.2s'
+            }
         }
     },
 
