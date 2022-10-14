@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
 import Stripe from 'stripe'
+import Head from 'next/head'
+import { useContextSelector } from 'use-context-selector'
 import axios from 'axios'
 
 import { stripe } from '../../lib/stripe'
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 
 import { ImageContainer, ProductContainer, ProductDetails } from '../../styles/pages/product'
-import { useState } from 'react'
-import Head from 'next/head'
+
 
 interface ProductProps {
     product: {
@@ -21,7 +24,15 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+    const addNewItem = useContextSelector(ShoppingCartContext, context => {
+        return context.addNewItem
+      })
+    
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState<boolean>(false)
+
+    function handleAddNewItemToShoppingCart() {   
+        addNewItem({ productId: product.id, quantity: 1})
+    }
 
     async function handleBuyProduct() {
         setIsCreatingCheckoutSession(true)
@@ -60,8 +71,8 @@ export default function Product({ product }: ProductProps) {
 
                     <p>{product.description}</p>
             
-                    <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
-                        Comprar agora
+                    <button disabled={isCreatingCheckoutSession} onClick={handleAddNewItemToShoppingCart}>
+                        Colocar na sacola
                     </button>
                 </ProductDetails>
             </ProductContainer>

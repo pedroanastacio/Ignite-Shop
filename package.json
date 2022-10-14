@@ -11,12 +11,15 @@
   "dependencies": {
     "@stitches/react": "^1.2.8",
     "axios": "^1.1.2",
+    "immer": "^9.0.15",
     "keen-slider": "^6.8.2",
     "next": "12.3.1",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "stripe": "^10.13.0"
+    "scheduler": "^0.23.0",
+    "stripe": "^10.13.0",
+    "use-context-selector": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "18.8.4",
