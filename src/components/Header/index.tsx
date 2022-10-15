@@ -4,7 +4,6 @@ import { Handbag } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { useContextSelector } from 'use-context-selector'
 
-
 import logoImg from '../../assets/logo.svg'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 
