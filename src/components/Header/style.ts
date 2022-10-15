@@ -14,11 +14,15 @@ export const HeaderContainer = styled('header', {
     }
 })
 
-export const ShoppingCartAnchor = styled('a', {
+export const ShoppingCartButton = styled('button', {
     padding: '0.75rem',
+    border: 0,
     borderRadius: 6,
     backgroundColor: '$gray800',
     position: 'relative',
+    cursor: 'pointer',
+    width: 48,
+    height: 48,
 
     display: 'flex',
     alignItems: 'center',
@@ -44,5 +48,11 @@ export const ShoppingCartAnchor = styled('a', {
         color: '$white',
         fontSize: '$sm',
         border: '3px solid $gray900',
+    },
+
+    '&:hover': {
+        svg: {
+            color: '$gray100',
+        },
     }
 })

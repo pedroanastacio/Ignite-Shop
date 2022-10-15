@@ -1,7 +1,5 @@
 import type { AppProps } from 'next/app'
-import Image from 'next/image';
-import Link from 'next/link';
-import { Handbag } from 'phosphor-react'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 import { Header } from '../components/Header';
 import { Container } from '../styles/pages/app';
@@ -14,11 +12,17 @@ globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ShoppingCartProvider>
-      <Container>
-        <Header />
+      <SkeletonTheme 
+        baseColor="#202024"
+        highlightColor="#2d2d33"
+        borderRadius={8}
+      >
+        <Container>
+          <Header />
 
-        <Component {...pageProps} />
-      </Container>
+          <Component {...pageProps} />
+        </Container>
+      </SkeletonTheme>
     </ShoppingCartProvider>
   )
 }

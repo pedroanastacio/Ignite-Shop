@@ -1,22 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Handbag } from 'phosphor-react'
+import { useEffect, useState } from 'react'
 import { useContextSelector } from 'use-context-selector'
 
 
 import logoImg from '../../assets/logo.svg'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 
-import { HeaderContainer, ShoppingCartAnchor } from './styles'
+import { HeaderContainer, ShoppingCartButton } from './style'
 
 export function Header() {
     const items = useContextSelector(ShoppingCartContext, (context) => {
       return context.items
     })
 
-    const cartIsNotEmpty = items.length !== 0
-    const itemsInCart = items.length
-    
+    const [numberOfItemsIncart, setNumberOfItemsInCart] = useState(0)
+
+    useEffect(() => {
+      setNumberOfItemsInCart(items.length)
+    }, [items])
+  
     return (
         <HeaderContainer>
           <Link href="/">
@@ -25,14 +29,11 @@ export function Header() {
             </a>
           </Link>
 
-          <Link href="/shopping-cart">
-            <ShoppingCartAnchor>
-              <Handbag size={24} />
+          <ShoppingCartButton>
+            <Handbag size={24} />
 
-              {cartIsNotEmpty && <span>{itemsInCart}</span>}
-            </ShoppingCartAnchor>
-          </Link>
+            {numberOfItemsIncart > 0 && <span>{numberOfItemsIncart}</span>}
+          </ShoppingCartButton>
         </HeaderContainer>
-
     )
 }

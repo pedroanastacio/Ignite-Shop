@@ -67,7 +67,7 @@ export function ShoppingCartProvider({ children }: PropsWithChildren) {
           '@ignite-shop:shopping-cart-state-1.0.0',
           stateJSON,
         )
-      }, [shoppingCartState])
+    }, [shoppingCartState])
 
     return (
         <ShoppingCartContext.Provider 

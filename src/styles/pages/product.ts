@@ -51,25 +51,57 @@ export const ProductDetails = styled('div', {
         color: '$gray300'
     },
 
-    button: {
+    form: {
         marginTop: 'auto',
-        backgroundColor: '$purple500',
-        border: 0,
-        color: '$white',
-        borderRadius: 8,
-        padding: '1.25rem',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        fontSize: '$md',
+        
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '2rem',
+    },
+})
 
-        '&:disabled': {
-            opacity: 0.6,
-            cursor: 'not-allowed',
+export const AddToCartButton = styled('button', {
+    width: '100%',
+    backgroundColor: '$purple500',
+    border: 0,
+    color: '$white',
+    borderRadius: 8,
+    padding: '1.25rem',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '$md',
+
+    '&:disabled': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+    },
+
+    '&:not(:disabled):hover': {
+        backgroundColor: '$purple300',
+        transition: 'background-color 0.2s'
+    }
+})
+
+export const SkeletonContainer = styled(ProductContainer, {  
+    div: {
+        display: 'flex',
+        flexDirection: 'column',
+
+        h2: {
+            marginTop: '1rem',
         },
-
-        '&:not(:disabled):hover': {
-            backgroundColor: '$purple300',
-            transition: 'background-color 0.2s'
+    
+        p: {
+            marginTop: '2.5rem',
+    
+            span: {
+                marginTop: '.5rem',
+            },
+        },
+    
+        form: {
+            marginTop: 'auto',
         }
     }
 })
