@@ -141,9 +141,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
 }
 
-export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
-    const test = await new Promise(resolve => setTimeout(resolve, 5000))
-    
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {  
     const productId = params!.id
     
     const product = await stripe.products.retrieve(productId, {

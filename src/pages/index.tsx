@@ -1,15 +1,11 @@
-import { MouseEvent } from 'react'
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useKeenSlider } from 'keen-slider/react'
 import Stripe from 'stripe'
-import { Handbag } from 'phosphor-react'
-import { useContextSelector } from 'use-context-selector';
 
 import { stripe } from "../lib/stripe";
-import { ShoppingCartContext } from '../contexts/ShoppingCartContext';
 
 import { HomeContainer, Product } from "../styles/pages/home";
 import 'keen-slider/keen-slider.min.css'
@@ -24,22 +20,12 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
-  const addNewItem = useContextSelector(ShoppingCartContext, context => {
-    return context.addNewItem
-  })
-
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2.5,
       spacing: 48,
     }
   })
-
-  function handleAddNewItemToShoppingCart(event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, productId: string) {
-    event.stopPropagation()
-
-    addNewItem({ productId, quantity: 1})
-  }
 
   return (
     <>
@@ -55,14 +41,8 @@ export default function Home({ products }: HomeProps) {
                 <Image src={product.imageUrl} alt="" width={520} height={480} />
 
                 <footer>
-                  <div>
                     <strong>{product.name}</strong>
                     <span>{product.price}</span>
-                  </div>
-
-                  <button onClick={(event) => handleAddNewItemToShoppingCart(event, product.id)}>
-                    <Handbag size={32} />
-                  </button>
                 </footer>
               </Product>
             </Link>

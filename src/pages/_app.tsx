@@ -2,10 +2,10 @@ import type { AppProps } from 'next/app'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
 import { Header } from '../components/Header';
-import { Container } from '../styles/pages/app';
 import { ShoppingCartProvider } from '../contexts/ShoppingCartContext';
 
 import { globalStyles } from '../styles/global'
+import { Container } from '../styles/pages/app';
 
 globalStyles();
 
