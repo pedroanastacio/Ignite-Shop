@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { useContextSelector } from "use-context-selector"
 
-import { ShoppingCartContext } from "../../../contexts/ShoppingCartContext"
-import { QuantityInput } from "../../QuantityInput"
+import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext"
+import { QuantityInput } from "../../../QuantityInput"
 
 import { ItemActions, ItemContainer, ItemDetails, ItemImageContainer } from "./style"
 

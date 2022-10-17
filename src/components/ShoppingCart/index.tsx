@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { X } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { ShoppingCartMenuContext } from "../../contexts/ShoppingCartMenuContext";
-import { Item as ShoppingCartItem } from "./Item";
+import { Item as ShoppingCartItem } from "./components/Item";
 import { Item } from "../../reducers/ShoppingCart/reducers";
 
 import { 
