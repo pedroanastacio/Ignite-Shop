@@ -43,7 +43,7 @@ export function shoppingCartReducer(state: ShoppingCartState, action: any) {
         }
         case ActionTypes.CHANGE_ITEM_QUANTITY: {
             const itemIndex = state.items.findIndex(
-              (item) => item.productId === action.payload.productId,
+              (item) => item.productId === action.payload.item.productId,
             )
       
             return produce(state, (draft) => {

@@ -1,13 +1,24 @@
-import { styled } from "../../styles";
+import { styled } from '../../styles';
 
 export const QuantityInputContainer = styled('div', {
-    backgroundColor: '$gray800',
-    padding: '.8rem',
-    borderRadius: 8,
+    variants: {
+        variant: {
+            dark: {
+                backgroundColor: '$gray800',
+            },
+            light: {
+                backgroundColor: '$gray700',
+            }
+        }
+    },
 
     display: 'flex',
     alignItems: 'center',
-    gap: '.5rem',
+    justifyContent: 'center',
+    gap: '.25rem',
+
+    padding: '.5rem',
+    borderRadius: 8,
 
     button: {
         background: 'transparent',
@@ -31,16 +42,16 @@ export const QuantityInputContainer = styled('div', {
         border: 0,
         textAlign: 'center',
         color: '$gray300',
-        fontSize: '$md',
+        fontSize: '$sm',
         MozAppearance: 'textfield',
     },
   
-    "input::-webkit-outer-spin-button": {
+    'input::-webkit-outer-spin-button': {
         WebkitAppearance: 'none',
         margin: 0,
     },
 
-    "input::-webkit-inner-spin-button": {
+    'input::-webkit-inner-spin-button': {
         WebkitAppearance: 'none',
         margin: 0,
     }

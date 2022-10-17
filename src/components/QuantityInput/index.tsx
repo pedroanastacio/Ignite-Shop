@@ -4,14 +4,14 @@ import { Minus, Plus } from 'phosphor-react'
 import { QuantityInputContainer } from './style'
 
 interface QuantityInputProps extends InputHTMLAttributes<HTMLInputElement> {
+    variant?: 'dark' | 'light'
     quantity: number
     max: number
     min?: number
     setQuantity: (quantity: number) => void
-
 }
 
-export function QuantityInput({ quantity, min = 1, max, setQuantity, ...props }: QuantityInputProps) {
+export function QuantityInput({ variant = 'dark', quantity, min = 1, max, setQuantity, ...props }: QuantityInputProps) {
 
     function handleQuantityChange(event: ChangeEvent<HTMLInputElement>) {
         event.target.setCustomValidity('')
@@ -27,7 +27,7 @@ export function QuantityInput({ quantity, min = 1, max, setQuantity, ...props }:
     }
 
     return (
-        <QuantityInputContainer>
+        <QuantityInputContainer variant={variant}>
             <button
                 type="button"
                 onClick={handleQuantityDecrement}

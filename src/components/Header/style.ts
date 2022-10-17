@@ -1,4 +1,4 @@
-import { styled } from "../../styles"
+import { styled } from '../../styles'
 
 export const HeaderContainer = styled('header', {
     padding: '2rem 0',
@@ -46,13 +46,19 @@ export const ShoppingCartButton = styled('button', {
         borderRadius: 999,
         backgroundColor: '$purple500',
         color: '$white',
-        fontSize: '$sm',
+        fontSize: '$xs',
         border: '3px solid $gray900',
     },
 
     '&:hover': {
         svg: {
             color: '$gray100',
+            transition: 'color 0.2s'
         },
     }
 })
+
+
+
+
+

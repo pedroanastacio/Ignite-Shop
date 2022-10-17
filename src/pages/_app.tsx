@@ -2,7 +2,9 @@ import type { AppProps } from 'next/app'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
 import { Header } from '../components/Header';
+import { ShoppingCart } from '../components/ShoppingCart';
 import { ShoppingCartProvider } from '../contexts/ShoppingCartContext';
+import { ShoppingCartMenuProvider } from '../contexts/ShoppingCartMenuContext';
 
 import { globalStyles } from '../styles/global'
 import { Container } from '../styles/pages/app';
@@ -18,8 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
         borderRadius={8}
       >
         <Container>
-          <Header />
-
+          <ShoppingCartMenuProvider>
+            <Header />
+            <ShoppingCart />
+          </ShoppingCartMenuProvider>
+         
           <Component {...pageProps} />
         </Container>
       </SkeletonTheme>
