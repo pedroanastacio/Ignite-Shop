@@ -11,6 +11,7 @@ import Skeleton from 'react-loading-skeleton'
 import { stripe } from '../../lib/stripe'
 import { QuantityInput } from '../../components/QuantityInput'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
+import { toBRL } from '../../utils/currency'
 
 import { 
     AddToCartButton,
@@ -21,12 +22,13 @@ import {
 } from '../../styles/pages/product'
 import 'react-loading-skeleton/dist/skeleton.css'
 
+
 interface ProductProps {
     product: {
         id: string
         name: string
         imageUrl: string
-        price: string
+        price: number
         description: string
         defaultPriceId: string
     }
@@ -45,7 +47,14 @@ export default function Product({ product }: ProductProps) {
     function handleAddNewItemToShoppingCart(event: FormEvent<HTMLFormElement>) {   
         event.preventDefault()
 
-        addNewItem({ productId: product.id, quantity})
+        addNewItem({
+            id: product.id,
+            imageUrl: product.imageUrl,
+            name: product.name,
+            price: product.price,
+            priceId: product.defaultPriceId,
+            quantity
+        })
     }
 
     // const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState<boolean>(false)
@@ -107,7 +116,7 @@ export default function Product({ product }: ProductProps) {
 
                 <ProductDetails>
                     <h1>{product.name}</h1>
-                    <span>{product.price}</span>
+                    <span>{toBRL(product.price)}</span>
 
                     <p>{product.description}</p>
 
@@ -157,12 +166,9 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
                 id: product.id,
                 name: product.name,
                 imageUrl: product.images[0],
-                price: new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                }).format(priceInCents / 100),
+                price: priceInCents,
                 description: product.description,
-                // defaultPriceId: price.id,
+                defaultPriceId: price.id,
             }
         },
         revalidate: 60 * 60 * 1, // 1 hour

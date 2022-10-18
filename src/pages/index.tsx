@@ -9,6 +9,7 @@ import { stripe } from "../lib/stripe";
 
 import { HomeContainer, Product } from "../styles/pages/home";
 import 'keen-slider/keen-slider.min.css'
+import { toBRL } from "../utils/currency";
 
 interface HomeProps {
   products: {
@@ -66,10 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(priceInCents / 100),
+      price: toBRL(priceInCents),
     }
   })
 

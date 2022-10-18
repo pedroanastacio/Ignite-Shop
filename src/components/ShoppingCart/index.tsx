@@ -1,4 +1,4 @@
-import { X } from "phosphor-react";
+import { Handbag, X } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 
@@ -6,9 +6,12 @@ import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { ShoppingCartMenuContext } from "../../contexts/ShoppingCartMenuContext";
 import { Item as ShoppingCartItem } from "./components/Item";
 import { Item } from "../../reducers/ShoppingCart/reducers";
+import { useCheckout } from "../../hooks/useCheckout";
+import { toBRL } from "../../utils/currency";
 
-import { 
+import {
     CheckoutButton,
+    EmptyCart,
     ShoppingCartContainer,
     TotalAmount,
     TotalQuantity
@@ -23,6 +26,8 @@ export function ShoppingCart() {
 
     const itemsInCart = useContextSelector(ShoppingCartContext, context => context.items)
 
+    const checkout = useCheckout()
+
     useEffect(() => {
         setItems(itemsInCart)
     }, [itemsInCart])
@@ -34,44 +39,55 @@ export function ShoppingCart() {
             customBurgerIcon={false}
             isOpen={isMenuOpen}
             onStateChange={(state) => stateChangeHandler(state)}
-            disableOverlayClick
+            noOverlay
         >
             <header>
                 <button onClick={closeMenu}>
                     <X size={24} />
                 </button>
-                
+
                 <h2>Sacola de compras</h2>
             </header>
 
-            <ul>
-                {items.map(item => {
-                    return (
-                        <ShoppingCartItem
-                            key={item.productId} 
-                            id={item.productId}
-                            imageUrl=""
-                            name="Camiseta Beyond the Limits"
-                            price="R$ 69,90"
-                            quantity={item.quantity}
-                        />
-                    )
-                })}
-            </ul>
+            {items.length === 0 ?
+                <EmptyCart>
+                    <Handbag size={40} />
+                    <p>Sua sacola está vazia.</p>
+                </EmptyCart>
+                :
+                <>
+                    <ul>
+                        {items.map(item => {
+                            return (
+                                <ShoppingCartItem
+                                    key={item.id}
+                                    product={{
+                                        id: item.id,
+                                        imageUrl: item.imageUrl,
+                                        name: item.name,
+                                        price: item.price,
+                                        quantity: item.quantity
+                                    }}                                   
+                                />
+                            )
+                        })}
+                    </ul>
 
-            <footer>
-                <TotalQuantity>
-                    <span>Quantidade</span>
-                    <span>3 itens </span>
-                </TotalQuantity>
+                    <footer>
+                        <TotalQuantity>
+                            <span>Quantidade</span>
+                            <span>{checkout.totalItems} {checkout.totalItems > 1 ? 'itens' : 'item' }</span>
+                       </TotalQuantity> 
 
-                <TotalAmount>
-                    <span>Valor total</span>
-                    <span>R$ 188,90</span>
-                </TotalAmount>
+                        <TotalAmount>
+                            <span>Valor total</span>
+                            <span>{toBRL(checkout.totalAmount)}</span>
+                        </TotalAmount>
 
-                <CheckoutButton>Finalizar compra</CheckoutButton>
-            </footer>
+                        <CheckoutButton>Finalizar compra</CheckoutButton>
+                    </footer>
+                </>
+            }
         </ShoppingCartContainer>
     )
 }

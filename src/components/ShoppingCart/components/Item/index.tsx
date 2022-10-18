@@ -2,44 +2,52 @@ import Image from "next/image"
 import { useContextSelector } from "use-context-selector"
 
 import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext"
+import { toBRL } from "../../../../utils/currency"
 import { QuantityInput } from "../../../QuantityInput"
 
 import { ItemActions, ItemContainer, ItemDetails, ItemImageContainer } from "./style"
 
 interface ItemProps {
-    id: string
-    imageUrl: string
-    name: string
-    price: string
-    quantity: number
+    product: {
+        id: string
+        imageUrl: string
+        name: string
+        price: number
+        quantity: number
+    }
 }
 
-export function Item({ id, imageUrl, name, price, quantity }: ItemProps) {
+export function Item({ product }: ItemProps) {
     const changeItemQuantity = useContextSelector(ShoppingCartContext, context => context.changeItemQuantity)
-    
+    const removeITem = useContextSelector(ShoppingCartContext, context => context.removeItem)
+
     function handleQuantityChange(quantity: number) {
-        changeItemQuantity({ productId: id, quantity })
+        changeItemQuantity(product.id, quantity)
+    }
+
+    function handleRemove() {
+        removeITem(product.id)
     }
     
     return (
         <ItemContainer>
             <ItemImageContainer>
-                <Image src={imageUrl} alt="" width={102} height={93} />
+                <Image src={product.imageUrl} alt="" width={102} height={93} />
             </ItemImageContainer>
 
             <ItemDetails>
-                <h4>{name}</h4>
+                <h4>{product.name}</h4>
 
-                <span>{price}</span>
+                <span>{toBRL(product.price * product.quantity)}</span>
 
                 <ItemActions>
                     <QuantityInput
                         variant="light"
                         max={5}
-                        quantity={quantity}
+                        quantity={product.quantity}
                         setQuantity={handleQuantityChange}
                     />
-                    <button>Remover</button>
+                    <button onClick={handleRemove}>Remover</button>
                 </ItemActions>
             </ItemDetails>
         </ItemContainer>

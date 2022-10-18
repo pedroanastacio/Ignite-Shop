@@ -16,20 +16,21 @@ export function addNewItemAction(item: Item) {
     }
   }
   
-  export function removeItemAction(productId: string) {
+  export function removeItemAction(id: string) {
     return {
       type: ActionTypes.REMOVE_ITEM,
       payload: {
-        productId,
+        id,
       },
     }
   }
   
-  export function changeItemQuantityAction(item: Item) {
+  export function changeItemQuantityAction(id: string, quantity: number) {
     return {
       type: ActionTypes.CHANGE_ITEM_QUANTITY,
       payload: {
-        item,
+        id,
+        quantity
       },
     }
   }

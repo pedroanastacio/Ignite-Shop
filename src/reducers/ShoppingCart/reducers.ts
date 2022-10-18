@@ -3,7 +3,11 @@ import { produce } from 'immer'
 import { ActionTypes } from "./actions"
 
 export interface Item {
-    productId: string
+    id: string
+    imageUrl: string
+    name: string
+    price: number
+    priceId: string
     quantity: number
 }
 
@@ -15,7 +19,7 @@ export function shoppingCartReducer(state: ShoppingCartState, action: any) {
     switch (action.type) {
         case ActionTypes.ADD_NEW_ITEM: {
             const itemIndex = state.items.findIndex(
-                (item) => item.productId === action.payload.item.productId,
+                (item) => item.id === action.payload.item.id,
             )
 
             if(itemIndex < 0) {
@@ -30,7 +34,7 @@ export function shoppingCartReducer(state: ShoppingCartState, action: any) {
         }
         case ActionTypes.REMOVE_ITEM: {
             const itemToBeRemovedIndex = state.items.findIndex(
-                (item) => item.productId === action.payload.productId,
+                (item) => item.id === action.payload.id,
             )
         
             if (itemToBeRemovedIndex < 0) {
@@ -43,11 +47,11 @@ export function shoppingCartReducer(state: ShoppingCartState, action: any) {
         }
         case ActionTypes.CHANGE_ITEM_QUANTITY: {
             const itemIndex = state.items.findIndex(
-              (item) => item.productId === action.payload.item.productId,
+              (item) => item.id === action.payload.id,
             )
       
             return produce(state, (draft) => {
-              draft.items[itemIndex].quantity = action.payload.item.quantity
+              draft.items[itemIndex].quantity = action.payload.quantity
             })
         }
         case ActionTypes.EMPTY_CART:

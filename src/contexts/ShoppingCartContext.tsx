@@ -12,8 +12,8 @@ import { Item, shoppingCartReducer } from "../reducers/ShoppingCart/reducers";
 interface ShoppingCartContextType {
     items: Item[]
     addNewItem: (item: Item) => void
-    removeItem: (productId: string) => void
-    changeItemQuantity: (item: Item) => void
+    removeItem: (id: string) => void
+    changeItemQuantity: (id: string, quantity: number) => void
     emptyCart: () => void
 }
 
@@ -48,12 +48,12 @@ export function ShoppingCartProvider({ children }: PropsWithChildren) {
         dispatch(addNewItemAction(item))
     }, [])
 
-    const removeItem = useCallback((productId: string) => {
-        dispatch(removeItemAction(productId))
+    const removeItem = useCallback((id: string) => {
+        dispatch(removeItemAction(id))
     }, [])
 
-    const changeItemQuantity = useCallback((item: Item) => {
-        dispatch(changeItemQuantityAction(item))
+    const changeItemQuantity = useCallback((id: string, quantity: number) => {
+        dispatch(changeItemQuantityAction(id, quantity))
     }, [])
 
     const emptyCart = useCallback(() => {

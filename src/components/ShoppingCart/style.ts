@@ -42,6 +42,7 @@ export const ShoppingCartContainer = styled(Menu, {
     ul: {
         marginTop: '2rem',
         marginBottom: '2rem',
+        overflow: 'auto',
     },
 
     footer: {
@@ -89,5 +90,24 @@ export const CheckoutButton = styled('button', {
     '&:hover': {
         backgroundColor: '$purple300',
         transition: 'background-color 0.2s'
+    }
+})
+
+export const EmptyCart = styled('div', {
+    display: 'flex !important',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '1rem',
+
+    height: '100%',
+
+    svg: {
+        color: '$gray400'
+    },
+
+    p: {
+        color: '$gray400',
+        fontSize: '$md',
     }
 })
