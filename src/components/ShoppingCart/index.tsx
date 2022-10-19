@@ -1,6 +1,7 @@
 import { Handbag, X } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
+import axios from "axios";
 
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { ShoppingCartMenuContext } from "../../contexts/ShoppingCartMenuContext";
@@ -19,14 +20,41 @@ import {
 
 export function ShoppingCart() {
     const [items, setItems] = useState<Item[]>([])
-
+    const checkout = useCheckout()
     const isMenuOpen = useContextSelector(ShoppingCartMenuContext, context => context.isMenuOpen)
     const stateChangeHandler = useContextSelector(ShoppingCartMenuContext, context => context.stateChangeHandler)
     const closeMenu = useContextSelector(ShoppingCartMenuContext, context => context.closeMenu)
-
     const itemsInCart = useContextSelector(ShoppingCartContext, context => context.items)
 
-    const checkout = useCheckout()
+    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState<boolean>(false)
+
+    async function handleCheckout() {
+        setIsCreatingCheckoutSession(true)
+
+        const lineItems = items.map(item => {
+            return {
+                price: item.priceId,
+                quantity: item.quantity
+            }
+        })
+
+        try {
+            const response = await axios.post('/api/checkout', {
+                items: lineItems
+            })
+
+            const { checkoutUrl } = response.data
+
+            window.location.href = checkoutUrl
+
+        } catch (error) {
+            setIsCreatingCheckoutSession(false)
+
+            // Recomendado: conectar a uma ferramenta de observabilidade (Datadog / Sentry)
+            alert('Falha ao redirecionar para checkout!')
+        }
+    }
+
 
     useEffect(() => {
         setItems(itemsInCart)
@@ -67,7 +95,7 @@ export function ShoppingCart() {
                                         name: item.name,
                                         price: item.price,
                                         quantity: item.quantity
-                                    }}                                   
+                                    }}
                                 />
                             )
                         })}
@@ -76,15 +104,20 @@ export function ShoppingCart() {
                     <footer>
                         <TotalQuantity>
                             <span>Quantidade</span>
-                            <span>{checkout.totalItems} {checkout.totalItems > 1 ? 'itens' : 'item' }</span>
-                       </TotalQuantity> 
+                            <span>{checkout.totalItems} {checkout.totalItems > 1 ? 'itens' : 'item'}</span>
+                        </TotalQuantity>
 
                         <TotalAmount>
                             <span>Valor total</span>
                             <span>{toBRL(checkout.totalAmount)}</span>
                         </TotalAmount>
 
-                        <CheckoutButton>Finalizar compra</CheckoutButton>
+                        <CheckoutButton
+                            disabled={isCreatingCheckoutSession}
+                            onClick={handleCheckout}
+                        >
+                            Finalizar compra
+                        </CheckoutButton>
                     </footer>
                 </>
             }

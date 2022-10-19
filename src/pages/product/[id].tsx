@@ -57,28 +57,6 @@ export default function Product({ product }: ProductProps) {
         })
     }
 
-    // const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState<boolean>(false)
-
-    // async function handleBuyProduct() {
-    //     setIsCreatingCheckoutSession(true)
-
-    //     try {
-    //         const response = await axios.post('/api/checkout', {
-    //             priceId: product.defaultPriceId
-    //         })
-
-    //         const { checkoutUrl } = response.data
-
-    //         window.location.href = checkoutUrl
-
-    //     } catch (error) {
-    //         setIsCreatingCheckoutSession(false)
-            
-    //         // Recomendado: conectar a uma ferramenta de observabilidade (Datadog / Sentry)
-    //         alert('Falha ao redirecionar para checkout!')
-    //     }
-    // }
-
     if(isFallback) {
         return (
             <SkeletonContainer>
@@ -129,17 +107,13 @@ export default function Product({ product }: ProductProps) {
                             setQuantity={onQuantityChange}
                         />
 
-                        <AddToCartButton 
-                            type="submit" 
-                            // disabled={isCreatingCheckoutSession} 
-                            // onClick={handleAddNewItemToShoppingCart}
-                        >
+                        <AddToCartButton type="submit">
                             Colocar na sacola
                         </AddToCartButton>
                     </form>
                 </ProductDetails>
             </ProductContainer>
-    </>        
+        </>        
     )
 }
 

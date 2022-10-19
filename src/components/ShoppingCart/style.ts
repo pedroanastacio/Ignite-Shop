@@ -43,6 +43,12 @@ export const ShoppingCartContainer = styled(Menu, {
         marginTop: '2rem',
         marginBottom: '2rem',
         overflow: 'auto',
+        scrollbarWidth: 'none',
+        MsOverflowStyle: 'none',
+    },
+
+    'ul::-webkit-scrollbar': {
+        display: 'none',
     },
 
     footer: {
