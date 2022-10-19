@@ -14,29 +14,31 @@ export const ShoppingCartContainer = styled(Menu, {
     },
 
     header: {
-        button: {
-            position: 'absolute',
-            top: 24,
-            right: 24,
-            border: 0,
-            background: 'transparent',
-            cursor: 'pointer',
+        div: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
 
-            svg: {
-                color: '$gray400',
+            h2: {
+                fontSize: '$lg',
             },
 
-            '&:hover': {
-                svg: {
-                    color: '$gray300',
+            button: {
+                border: 0,
+                background: 'transparent',
+                color: '$purple500',
+                width: 'fit-content',
+                fontSize: '$sm',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+
+                '&:hover': {
+                    color: '$purple300',
                     transition: 'color 0.2s'
                 }
             }
-        },
+        }
 
-        h2: {
-            fontSize: '$lg',
-        },
     },
 
     ul: {
@@ -59,6 +61,26 @@ export const ShoppingCartContainer = styled(Menu, {
             alignItems: 'center',
             justifyContent: 'space-between',
         },
+    }
+})
+
+export const CloseButton = styled('button', {
+    position: 'absolute',
+    top: 24,
+    right: 24,
+    border: 0,
+    background: 'transparent',
+    cursor: 'pointer',
+
+    svg: {
+        color: '$gray400',
+    },
+
+    '&:hover': {
+        svg: {
+            color: '$gray300',
+            transition: 'color 0.2s'
+        }
     }
 })
 

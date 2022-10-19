@@ -12,6 +12,7 @@ import { toBRL } from "../../utils/currency";
 
 import {
     CheckoutButton,
+    CloseButton,
     EmptyCart,
     ShoppingCartContainer,
     TotalAmount,
@@ -73,11 +74,15 @@ export function ShoppingCart() {
             noOverlay
         >
             <header>
-                <button onClick={closeMenu}>
+                <CloseButton onClick={closeMenu}>
                     <X size={24} />
-                </button>
+                </CloseButton>
 
-                <h2>Sacola de compras</h2>
+                <div>
+                    <h2>Sacola de compras</h2>
+
+                    {items.length > 0 && <button onClick={emptyCart}>Esvaziar sacola</button>}
+                </div>
             </header>
 
             {items.length === 0 ?
