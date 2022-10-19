@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, ReactElement, useState } from 'react'
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -7,11 +7,12 @@ import Head from 'next/head'
 import { useContextSelector } from 'use-context-selector'
 import Skeleton from 'react-loading-skeleton'
 
-
 import { stripe } from '../../lib/stripe'
 import { QuantityInput } from '../../components/QuantityInput'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { toBRL } from '../../utils/currency'
+import { NextPageWithLayout } from '../_app'
+import { DefaultLayout } from '../../layouts/DefaultLayout'
 
 import { 
     AddToCartButton,
@@ -21,7 +22,6 @@ import {
     SkeletonContainer
 } from '../../styles/pages/product'
 import 'react-loading-skeleton/dist/skeleton.css'
-
 
 interface ProductProps {
     product: {
@@ -34,7 +34,7 @@ interface ProductProps {
     }
 }
 
-export default function Product({ product }: ProductProps) {
+const Product: NextPageWithLayout<ProductProps> = ({ product }) => {
     const [quantity, setQuantity] = useState<number>(1)
     const addNewItem = useContextSelector(ShoppingCartContext, context => context.addNewItem)
 
@@ -117,6 +117,14 @@ export default function Product({ product }: ProductProps) {
     )
 }
 
+Product.getLayout = function getLayout(page: ReactElement) {
+    return (
+        <DefaultLayout>
+            {page}
+        </DefaultLayout>
+    )
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [],
@@ -148,3 +156,5 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         revalidate: 60 * 60 * 1, // 1 hour
     }
 }
+
+export default Product

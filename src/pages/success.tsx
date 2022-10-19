@@ -5,6 +5,7 @@ import Head from "next/head";
 import Stripe from "stripe";
 
 import { stripe } from "../lib/stripe";
+import logoImg from "../assets/logo.svg"
 
 import { ImageContainer, ImagesContainer, SuccessContainer } from "../styles/pages/success";
 
@@ -24,6 +25,8 @@ export default function Success({ customerName, productImages, totalProducts }: 
             </Head>
 
             <SuccessContainer>
+                <Image src={logoImg} alt="" />
+
                 <ImagesContainer>
                     {productImages.map((image, index) => {
                         return (

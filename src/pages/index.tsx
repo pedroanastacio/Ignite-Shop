@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,10 +7,12 @@ import { useKeenSlider } from 'keen-slider/react'
 import Stripe from 'stripe'
 
 import { stripe } from "../lib/stripe";
+import { toBRL } from "../utils/currency";
+import { NextPageWithLayout } from "./_app";
 
 import { HomeContainer, Product } from "../styles/pages/home";
 import 'keen-slider/keen-slider.min.css'
-import { toBRL } from "../utils/currency";
+import { DefaultLayout } from "../layouts/DefaultLayout";
 
 interface HomeProps {
   products: {
@@ -20,7 +23,7 @@ interface HomeProps {
   }[]
 }
 
-export default function Home({ products }: HomeProps) {
+const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2.5,
@@ -33,7 +36,7 @@ export default function Home({ products }: HomeProps) {
       <Head>
         <title>Home | Ignite Shop</title>
       </Head>
-      
+
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
@@ -42,8 +45,8 @@ export default function Home({ products }: HomeProps) {
                 <Image src={product.imageUrl} alt="" width={520} height={480} />
 
                 <footer>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
                 </footer>
               </Product>
             </Link>
@@ -51,6 +54,14 @@ export default function Home({ products }: HomeProps) {
         })}
       </HomeContainer>
     </>
+  )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <DefaultLayout>
+      {page}
+    </DefaultLayout>
   )
 }
 
@@ -78,3 +89,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60 * 60 * 1, // 1 hour
   }
 }
+
+export default Home

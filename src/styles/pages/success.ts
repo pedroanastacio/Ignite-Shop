@@ -42,6 +42,8 @@ export const ImagesContainer = styled('div', {
     alignItems: 'center',
     justifyContent: 'center',
 
+    marginTop: '6.5rem',
+
     '& div + div': {
         marginLeft: -50,
     },
@@ -54,7 +56,6 @@ export const ImageContainer = styled('div', {
     background: 'linear-gradient(180deg, $green300 0%, $purple300 100%)',
     borderRadius: 999,
     padding: '0.25rem',
-    marginTop: '4rem',
     boxShadow: '0px 0px 75px #121214',
 
     display: 'flex',
