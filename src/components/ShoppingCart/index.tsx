@@ -25,6 +25,7 @@ export function ShoppingCart() {
     const stateChangeHandler = useContextSelector(ShoppingCartMenuContext, context => context.stateChangeHandler)
     const closeMenu = useContextSelector(ShoppingCartMenuContext, context => context.closeMenu)
     const itemsInCart = useContextSelector(ShoppingCartContext, context => context.items)
+    const emptyCart = useContextSelector(ShoppingCartContext, context => context.emptyCart)
 
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState<boolean>(false)
 
@@ -44,6 +45,8 @@ export function ShoppingCart() {
             })
 
             const { checkoutUrl } = response.data
+
+            emptyCart()
 
             window.location.href = checkoutUrl
 

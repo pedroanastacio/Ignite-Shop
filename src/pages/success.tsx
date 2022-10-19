@@ -40,7 +40,7 @@ export default function Success({ customerName, productImages, totalProducts }: 
                 <h1>Compra efetuada!</h1>
 
                 <p>
-                    Uhuul <strong>{customerName}</strong>, sua compra de {totalProducts} camisetas já está a caminho da sua casa.
+                    Uhuul <strong>{customerName}</strong>, sua compra de {totalProducts} {totalProducts > 1 ? 'camisetas' : 'camiseta'} já está a caminho da sua casa.
                 </p>
 
                 <Link href="/">
