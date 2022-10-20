@@ -6,14 +6,14 @@ export const ProductContainer = styled('main', {
     alignItems: 'stretch',
     gap: '4rem',
 
-    maxWidth: 1180,
+    maxWidth: '73.75rem',
     margin: '0 auto',
 })
 
 export const ImageContainer = styled('div', {
     width: '100%',
-    maxWidth: 576,
-    height: 656,
+    maxWidth: '36rem',
+    height: '41rem',
     background: 'linear-gradient(180deg, $green300 0%, $purple300 100%)',
     borderRadius: 8,
     padding: '0.25rem',

@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const HeaderContainer = styled('header', {
     padding: '2rem 0',
     width: '100%',
-    maxWidth: 1180,
+    maxWidth: '73.75rem',
     margin: '0 auto',
 
     display: 'flex',
@@ -21,8 +21,8 @@ export const ShoppingCartButton = styled('button', {
     backgroundColor: '$gray800',
     position: 'relative',
     cursor: 'pointer',
-    width: 48,
-    height: 48,
+    width: '3rem',
+    height: '3rem',
 
     display: 'flex',
     alignItems: 'center',

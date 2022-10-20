@@ -3,10 +3,58 @@ import { styled } from "..";
 export const HomeContainer = styled('main', {
     display: 'flex',
     width: '100%',
-    maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-    marginLeft: 'auto',
-    minHeight: 656,
+    // maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
+    // marginLeft: 'auto',
+    maxWidth: '90rem',
+    margin: '0 auto',
+    minHeight: '41rem',
     position: 'relative',
+})
+
+export const ArrowContainer = styled('div', {
+    position: 'absolute',
+    height: '100%',
+    width: '8.5rem',
+
+    display: 'flex',
+    alignItems: 'center',
+
+    button: {
+        border: 0,
+        background: 'transparent',
+        cursor: 'pointer',
+
+        '&:hover': {
+            svg: {
+                color: '$gray300',
+                transition: 'color 0.2s',
+            },
+        },
+
+        svg: {
+            color: '$gray400'
+        }
+    }
+})
+
+export const BackArrow = styled(ArrowContainer, {
+    left: 0,
+    backgroundColor: 'red',
+    background: 'linear-gradient(90deg, $gray900 0%, rgba(18, 18, 20, 0) 100%)',
+
+    svg: {
+        marginLeft: '1rem'
+    }
+})
+
+export const NextArrow = styled(ArrowContainer, {
+    right: 0,
+    backgroundColor: 'red',
+    background: 'linear-gradient(90deg, rgba(18, 18, 20, 0) 0%, $gray900 100%)',
+
+    svg: {
+        marginLeft: '4.5rem'
+    }
 })
 
 export const Product = styled('a', {
@@ -30,7 +78,7 @@ export const Product = styled('a', {
         left: '0.25rem',
         right: '0.25rem',
         padding: '2rem',
-        
+
         borderRadius: 6,
 
         display: 'flex',
@@ -39,12 +87,10 @@ export const Product = styled('a', {
 
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
-        transform: 'translateY(110%)',
-        opacity: 0,
         transition: 'all 0.2s ease-in-out',
 
         strong: {
-            fontSize: '$lg', 
+            fontSize: '$lg',
             color: '$gray100',
             display: 'block',
         },
@@ -57,8 +103,8 @@ export const Product = styled('a', {
         },
 
         button: {
-            width: 56,
-            height: 56,
+            width: '3.5rem',
+            height: '3.5rem',
             padding: '0.75rem',
             borderRadius: 6,
             border: 0,
@@ -73,14 +119,25 @@ export const Product = styled('a', {
                 backgroundColor: '$purple300',
                 transition: 'background-color 0.2s'
             }
-        }
+        },
     },
 
-    '&:hover': {
-        footer: {
-            transform: 'translateY(0%)',
-            opacity: 1,
+    variants: {
+        variant: {
+            hidden: {
+                footer: {
+                    transform: 'translateY(110%)',
+                    opacity: 0,
+                }
+            },
+
+            shown: {
+                footer: {
+                    transform: 'translateY(0%)',
+                    opacity: 1,
+                }
+            }
         }
-    }
+    },
 })
 

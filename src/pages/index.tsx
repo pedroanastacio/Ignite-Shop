@@ -1,16 +1,17 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useKeenSlider } from 'keen-slider/react'
 import Stripe from 'stripe'
+import { CaretLeft, CaretRight } from 'phosphor-react'
 
 import { stripe } from "../lib/stripe";
 import { toBRL } from "../utils/currency";
 import { NextPageWithLayout } from "./_app";
 
-import { HomeContainer, Product } from "../styles/pages/home";
+import { BackArrow, HomeContainer, NextArrow, Product } from "../styles/pages/home";
 import 'keen-slider/keen-slider.min.css'
 import { DefaultLayout } from "../layouts/DefaultLayout";
 
@@ -24,11 +25,29 @@ interface HomeProps {
 }
 
 const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
-  const [sliderRef] = useKeenSlider({
+  const [currentSlide, setCurrentSlide] = useState<number>(0)
+  const [loaded, setLoaded] = useState<boolean>(false)
+  const [sliderRef, sliderInstanceRef] = useKeenSlider({
+    initial: 0,
+    breakpoints: {
+      '(min-width: 768px)': {
+        slides: {
+          perView: 2,
+          spacing: 48,
+          origin: 'center',
+        }
+      },
+    },
     slides: {
-      perView: 2.5,
-      spacing: 48,
-    }
+      perView: 1,
+      spacing: 24,
+    },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
+    },
+    created() {
+      setLoaded(true)
+    },
   })
 
   return (
@@ -38,10 +57,17 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
+        {products.map((product, index) => {
           return (
-            <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
-              <Product className="keen-slider__slide">
+            <Link
+              key={product.id}
+              href={`/product/${product.id}`}
+              prefetch={false}
+            >
+              <Product
+                className="keen-slider__slide"
+                variant={currentSlide === index ? 'shown' : 'hidden'}
+              >
                 <Image src={product.imageUrl} alt="" width={520} height={480} />
 
                 <footer>
@@ -52,6 +78,26 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
             </Link>
           )
         })}
+
+        {loaded && sliderInstanceRef.current &&
+          <>
+            {currentSlide !== 0 &&
+              <BackArrow>
+                <button onClick={(e: any) => e.stopPropagation() || sliderInstanceRef.current?.prev()}>
+                  <CaretLeft size={48} />
+                </button>
+              </BackArrow>
+            }
+
+            {currentSlide !== sliderInstanceRef.current.track.details.slides.length - 1 &&
+              <NextArrow>
+                <button onClick={(e: any) => e.stopPropagation() || sliderInstanceRef.current?.next()}>
+                  <CaretRight size={48} />
+                </button>
+              </NextArrow>
+            }
+          </>
+        }
       </HomeContainer>
     </>
   )
