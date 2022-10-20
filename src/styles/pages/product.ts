@@ -1,18 +1,27 @@
 import { styled } from "..";
 
 export const ProductContainer = styled('main', {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    alignItems: 'stretch',
-    gap: '4rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2rem',
 
     maxWidth: '73.75rem',
     margin: '0 auto',
+    padding: '0 1rem 2rem 1rem',
+
+    '@sm': {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '2rem',
+    },
+
+    '@md': {
+        gap: '4rem',
+    }
 })
 
 export const ImageContainer = styled('div', {
     width: '100%',
-    maxWidth: '36rem',
     height: '41rem',
     background: 'linear-gradient(180deg, $green300 0%, $purple300 100%)',
     borderRadius: 8,
@@ -24,8 +33,11 @@ export const ImageContainer = styled('div', {
 
     img: {
         objectFit: 'cover'
-    }
+    },
 
+    '@sm': {
+        maxWidth: '36rem',
+    }
 })
 
 export const ProductDetails = styled('div', {
@@ -52,12 +64,16 @@ export const ProductDetails = styled('div', {
     },
 
     form: {
-        marginTop: 'auto',
+        marginTop: '2rem',
         
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '2rem',
+
+        '@sm': {
+            marginTop: 'auto',
+        }
     },
 })
 
