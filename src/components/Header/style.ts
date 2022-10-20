@@ -1,9 +1,9 @@
 import { styled } from '../../styles'
 
 export const HeaderContainer = styled('header', {
-    padding: '2rem 0',
+    padding: '2rem 1rem',
     width: '100%',
-    maxWidth: '73.75rem',
+    maxWidth: '75.75rem',
     margin: '0 auto',
 
     display: 'flex',

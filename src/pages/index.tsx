@@ -30,8 +30,15 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     initial: 0,
     breakpoints: {
-      '(min-width: 768px)': {
+      '(min-width: 576px)': {
         slides: {
+          perView: 2,
+          spacing: 24,
+          origin: 'center',
+        }
+      },
+      '(min-width: 992px)': {
+        slides: { 
           perView: 2,
           spacing: 48,
           origin: 'center',

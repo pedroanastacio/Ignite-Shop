@@ -6,34 +6,39 @@ export const HomeContainer = styled('main', {
     // maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
     // marginLeft: 'auto',
     maxWidth: '90rem',
-    margin: '0 auto',
     minHeight: '41rem',
+    margin: '0 auto',
+    paddingBottom: '2rem',
     position: 'relative',
 })
 
 export const ArrowContainer = styled('div', {
-    position: 'absolute',
-    height: '100%',
-    width: '8.5rem',
+    display: 'none',
 
-    display: 'flex',
-    alignItems: 'center',
+    '@sm': {
+        display: 'flex',
+        alignItems: 'center',
 
-    button: {
-        border: 0,
-        background: 'transparent',
-        cursor: 'pointer',
+        position: 'absolute',
+        height: '100%',
+        width: '8.5rem',
 
-        '&:hover': {
-            svg: {
-                color: '$gray300',
-                transition: 'color 0.2s',
+        button: {
+            border: 0,
+            background: 'transparent',
+            cursor: 'pointer',
+    
+            '&:hover': {
+                svg: {
+                    color: '$gray300',
+                    transition: 'color 0.2s',
+                },
             },
-        },
-
-        svg: {
-            color: '$gray400'
-        }
+    
+            svg: {
+                color: '$gray400'
+            }
+        },    
     }
 })
 
@@ -44,7 +49,7 @@ export const BackArrow = styled(ArrowContainer, {
 
     svg: {
         marginLeft: '1rem'
-    }
+    },
 })
 
 export const NextArrow = styled(ArrowContainer, {
@@ -84,6 +89,7 @@ export const Product = styled('a', {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        gap: '1rem',
 
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
 

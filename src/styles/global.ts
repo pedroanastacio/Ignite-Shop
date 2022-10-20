@@ -6,7 +6,7 @@ export const globalStyles = globalCss({
         padding: 0,
         boxSizing: 'border-box',
     },
-    
+
     body: {
         backgroundColor: '$gray900',
         color: '$gray100',
@@ -17,4 +17,14 @@ export const globalStyles = globalCss({
         fontFamily: 'Roboto',
         fontWeight: 400,
     },
+
+    html: {
+        fontSize: '87.5%',
+    },
+
+    '@sm': {
+        html: {
+            fontSize: '100%',
+        }
+    }
 })
