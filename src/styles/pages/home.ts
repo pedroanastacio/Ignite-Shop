@@ -1,69 +1,85 @@
 import { styled } from "..";
 
-export const HomeContainer = styled('main', {
+export const ProductsList = styled('main', {
     display: 'flex',
-    width: '100%',
-    // maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-    // marginLeft: 'auto',
-    maxWidth: '90rem',
-    minHeight: '41rem',
-    margin: '0 auto',
-    paddingBottom: '2rem',
-    position: 'relative',
-})
+    flexDirection: 'column',
+    gap: '1.5rem',
 
-export const ArrowContainer = styled('div', {
-    display: 'none',
+    width: '100%',
+    padding: '0 1rem 2rem 1rem',
 
     '@sm': {
-        display: 'flex',
-        alignItems: 'center',
-
-        position: 'absolute',
-        height: '100%',
-        width: '8.5rem',
-
-        button: {
-            border: 0,
-            background: 'transparent',
-            cursor: 'pointer',
-    
-            '&:hover': {
-                svg: {
-                    color: '$gray300',
-                    transition: 'color 0.2s',
-                },
-            },
-    
-            svg: {
-                color: '$gray400'
-            }
-        },    
+        display: 'none',
     }
 })
 
-export const BackArrow = styled(ArrowContainer, {
-    left: 0,
-    backgroundColor: 'red',
-    background: 'linear-gradient(90deg, $gray900 0%, rgba(18, 18, 20, 0) 100%)',
+export const ProductSlider = styled('main', {
+    display: 'none !important',
 
-    svg: {
-        marginLeft: '1rem'
-    },
+    '@sm': {
+        display: 'flex !important',
+        width: '100%',
+        maxWidth: '90rem',
+        minHeight: '41rem',
+        margin: '0 auto',
+        paddingBottom: '2rem',
+        position: 'relative',
+    }
 })
 
-export const NextArrow = styled(ArrowContainer, {
-    right: 0,
-    backgroundColor: 'red',
-    background: 'linear-gradient(90deg, rgba(18, 18, 20, 0) 0%, $gray900 100%)',
+export const SliderControls = styled('div', {
+    display: 'flex',
+    alignItems: 'center',
 
-    svg: {
-        marginLeft: '4.5rem'
+    position: 'absolute',
+    height: '100%',
+    width: '8.5rem',
+
+    button: {
+        border: 0,
+        background: 'transparent',
+        cursor: 'pointer',
+
+        '&:hover': {
+            svg: {
+                color: '$gray300',
+                transition: 'color 0.2s',
+            },
+        },
+
+        svg: {
+            color: '$gray400'
+        }
+    },
+
+    variants: {
+        side: {
+            left: {
+                left: 0,
+                backgroundColor: 'red',
+                background: 'linear-gradient(90deg, $gray900 0%, rgba(18, 18, 20, 0) 100%)',
+
+                svg: {
+                    marginLeft: '1rem'
+                },
+            },
+
+            right: {
+                right: 0,
+                backgroundColor: 'red',
+                background: 'linear-gradient(90deg, rgba(18, 18, 20, 0) 0%, $gray900 100%)',
+
+                svg: {
+                    marginLeft: '4.5rem'
+                }
+            }
+        }
     }
 })
 
 export const Product = styled('a', {
     background: 'linear-gradient(180deg, $green300 0%, $purple300 100%)',
+    minHeight: '41rem',
     borderRadius: 8,
     cursor: 'pointer',
     position: 'relative',

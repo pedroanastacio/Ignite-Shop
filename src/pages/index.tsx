@@ -11,9 +11,9 @@ import { stripe } from "../lib/stripe";
 import { toBRL } from "../utils/currency";
 import { NextPageWithLayout } from "./_app";
 
-import { BackArrow, HomeContainer, NextArrow, Product } from "../styles/pages/home";
-import 'keen-slider/keen-slider.min.css'
+import { ProductSlider, ProductsList, Product, SliderControls } from "../styles/pages/home";
 import { DefaultLayout } from "../layouts/DefaultLayout";
+import 'keen-slider/keen-slider.min.css'
 
 interface HomeProps {
   products: {
@@ -24,21 +24,16 @@ interface HomeProps {
   }[]
 }
 
+const BREAKPOINT = 768
+
 const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [sliderRef, sliderInstanceRef] = useKeenSlider({
     initial: 0,
     breakpoints: {
-      '(min-width: 576px)': {
-        slides: {
-          perView: 2,
-          spacing: 24,
-          origin: 'center',
-        }
-      },
       '(min-width: 992px)': {
-        slides: { 
+        slides: {
           perView: 2,
           spacing: 48,
           origin: 'center',
@@ -46,8 +41,9 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
       },
     },
     slides: {
-      perView: 1,
+      perView: 2,
       spacing: 24,
+      origin: 'center',
     },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
@@ -63,7 +59,31 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
         <title>Home | Ignite Shop</title>
       </Head>
 
-      <HomeContainer ref={sliderRef} className="keen-slider">
+      <ProductsList>
+        {products.map((product, index) => {
+          return (
+            <Link
+              key={product.id}
+              href={`/product/${product.id}`}
+              prefetch={false}
+            >
+              <Product
+                className="keen-slider__slide"
+                variant='shown'
+              >
+                <Image src={product.imageUrl} alt="" width={520} height={480} />
+
+                <footer>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </footer>
+              </Product>
+            </Link>
+          )
+        })}
+      </ProductsList>
+
+      <ProductSlider ref={sliderRef} className="keen-slider">
         {products.map((product, index) => {
           return (
             <Link
@@ -89,23 +109,23 @@ const Home: NextPageWithLayout<HomeProps> = ({ products }) => {
         {loaded && sliderInstanceRef.current &&
           <>
             {currentSlide !== 0 &&
-              <BackArrow>
+              <SliderControls side='left'>
                 <button onClick={(e: any) => e.stopPropagation() || sliderInstanceRef.current?.prev()}>
                   <CaretLeft size={48} />
                 </button>
-              </BackArrow>
+              </SliderControls>
             }
 
             {currentSlide !== sliderInstanceRef.current.track.details.slides.length - 1 &&
-              <NextArrow>
+              <SliderControls side='right'>
                 <button onClick={(e: any) => e.stopPropagation() || sliderInstanceRef.current?.next()}>
                   <CaretRight size={48} />
                 </button>
-              </NextArrow>
+              </SliderControls>
             }
           </>
         }
-      </HomeContainer>
+      </ProductSlider>
     </>
   )
 }
