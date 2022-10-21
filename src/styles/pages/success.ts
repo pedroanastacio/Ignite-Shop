@@ -7,6 +7,7 @@ export const SuccessContainer = styled('main', {
     justifyContent: 'center',
     margin: '0 auto',
     heigth: '41rem',
+    padding: '0 1rem',
 
     h1: {
         fontSize: '$2xl',
