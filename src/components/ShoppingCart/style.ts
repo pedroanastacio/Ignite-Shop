@@ -6,7 +6,13 @@ export const ShoppingCartContainer = styled(Menu, {
     top: 0,
     bottom: 0,
     backgroundColor: '$gray800',
-    padding: '4.5rem 3rem 3rem 3rem',
+    padding: '4.5rem 2rem 2rem 2rem',
+    width: '100% !important',
+    maxWidth: '480px',
+
+    '@xs': {
+        padding: '4.5rem 3rem 3rem 3rem',
+    },
 
     nav: {
         display: 'flex',

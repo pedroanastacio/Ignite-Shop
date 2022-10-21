@@ -67,7 +67,6 @@ export function ShoppingCart() {
     return (
         <ShoppingCartContainer
             right
-            width={480}
             customBurgerIcon={false}
             isOpen={isMenuOpen}
             onStateChange={(state) => stateChangeHandler(state)}

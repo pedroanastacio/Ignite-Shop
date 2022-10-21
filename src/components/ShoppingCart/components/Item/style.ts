@@ -11,6 +11,8 @@ export const ItemContainer = styled('li', {
 export const ItemImageContainer = styled('div', {
     background: 'linear-gradient(180deg, $green300 0%, $purple300 100%)',
     borderRadius: 8,
+    minWidth: 102,
+    minHeight: 93,
 })
 
 export const ItemDetails = styled('div', {
